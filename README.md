@@ -37,18 +37,18 @@
     Делаем всё то-же самое
     ----------------------------------------------------------------------------------------------------------------------
     - Для ceph-node-02:  
-      ```sh
-      ceph-deploy disk list ceph-node-02  
-      ceph-deploy disk zap ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd  
-      ceph-deploy osd create ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd
-      ```  
+    ```sh
+        ceph-deploy disk list ceph-node-02  
+        ceph-deploy disk zap ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd  
+        ceph-deploy osd create ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd
+    ```  
 
     - И для ceph-node-03  
-      ```sh
-      ceph-deploy disk list ceph-node-03
-      ceph-deploy disk zap ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
-      ceph-deploy osd create ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
-      ```
+    ```sh
+        ceph-deploy disk list ceph-node-03
+        ceph-deploy disk zap ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
+        ceph-deploy osd create ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
+    ```
   + Проверяем статус ceph:  
     `ceph -s`
   + Должен быть *WARNING*: clock skew. Он появляется из-за того, что время на хостах не синхронизировано. Исправляем:  
