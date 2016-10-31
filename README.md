@@ -1,6 +1,6 @@
 # Установка и настройка Ubuntu
   + Установка [Ubuntu Server 14.04 LTS](http://releases.ubuntu.com/trusty/ubuntu-14.04.5-server-amd64.iso)
-  + Отключение ввода пароля при обращении через sudo:
+  + Отключение ввода пароля при обращении через sudo:  
     В файле `/etc/sudoers` находим строку `%sudo   ALL=(ALL:ALL) ALL` и заменяем её на `%sudo   ALL=(ALL:ALL) NOPASSWD: ALL`.     Проделываем это на всех хостах.
   + Добавление алиаса ceph='sudo ceph' (для удобства в будущем):
     Открываем файл `~/.bashrs` и в конец файла добавляем строку `alias ceph='sudo ceph'`, и перезагружаем оболочку
@@ -75,12 +75,12 @@
       `sudo apt install tgt`
     - В ~/ceph.conf обязательно отключаем кеширование rbd. Для этого добавляем в этот файл следующие строки:  
       ```
-        [client]    
+        [client] &lt;br&lt;
         rbd_cache = false
       ```
     - Задаем экспорт по iscsi rbd тома, в файле `/etc/tgt/targets.conf`:  
-        ```
-        <target iqn.2016-11.rbdstore.iscsi.com:iscsi>    
+        ```xml
+            <target iqn.2016-11.rbdstore.iscsi.com:iscsi>    
             driver iscsi    
             bs-type rbd    
             backing-store rbd/iscsi
