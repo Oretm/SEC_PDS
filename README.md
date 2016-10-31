@@ -1,60 +1,60 @@
 # Установка и настройка Ubuntu
-  + Установка Ubuntu Server 14.04 LTS <http://releases.ubuntu.com/trusty/ubuntu-14.04.5-server-amd64.iso>
+  + Установка [Ubuntu Server 14.04 LTS](http://releases.ubuntu.com/trusty/ubuntu-14.04.5-server-amd64.iso)
   + Добавление пользователя cephthree в список исключения sudo (Чтобы не вводить каждый раз пароль):
-    В файле `/etc/sudoers` находим строку `%sudo   ALL=(ALL:ALL) ALL` и заменяем её на `%sudo   ALL=(ALL:ALL) NOPASSWD: ALL`
+    В файле `/etc/sudoers` находим строку `%sudo   ALL=(ALL:ALL) ALL` и заменяем её на `%sudo   ALL=(ALL:ALL) NOPASSWD: ALL`.     Проделываем это на всех хостах.
   + Добавление алиаса ceph='sudo ceph' (для удобства в будущем):
     Открываем файл `~/.bashrs` и в конец файла добавляем строку `alias ceph='sudo ceph'`, и перезагружаем оболочку
   + Создание ssh-ключей, чтобы не вводить пароль каждый раз, при подключении к другому хосту по ssh:
     - Создаем ключ для подключения к хостам с первого без набора пароля:  
       `ssh-keygen`
-    - Копируем ключ на cephthree-01:  
-      `ssh-copy-id cephthree-01`
-    - Копируем ключ на cephthree-02:  
-      `ssh-copy-id cephthree-02`
-    - Копируем ключ на cephthree-03:  
-      `ssh-copy-id cephthree-03`
+    - Копируем ключ на ceph-node-01:  
+      `ssh-copy-id ceph-node-01`
+    - Копируем ключ на ceph-node-02:  
+      `ssh-copy-id ceph-node-02`
+    - Копируем ключ на ceph-node-03:  
+      `ssh-copy-id ceph-node-03`
 
 # Развертывание ceph
-  + Скачивание ceph-deploy:
+  + Установка ceph-deploy:
     - `sudo apt install ceph-deploy`
-  + Разворачиваем Ceph
+  + Разворачиваем Ceph:
     - Создание конфига ceph.conf:  
-      `ceph-deploy new cephthree-01 cephthree-02 cephthree-03`
-    - Установка Ceph 0.80.11 Jewel на cephthree-01, cephthree-02, cephthree-03:  
-      `ceph-deploy install --release jewel cephthree-01 cephthree-02 cephthree-03`
+      `ceph-deploy new ceph-node-01 ceph-node-02 ceph-node-03`
+    - Установка Ceph 0.80.11 Jewel на ceph-node-01, ceph-node-02, ceph-node-03:  
+      `ceph-deploy install --release jewel ceph-node-01 ceph-node-02 ceph-node-03`
     - Посмотреть версию (проверка того, что ceph установился):  
       `ceph -v`
   + Установка монитров для ceph:  
     `ceph-deploy mon create-initial`
   + Установка OSD:
     - Просмотреть список доступных дисковых устройств:  
-      `ceph-deploy disk list cephthree-01`
+      `ceph-deploy disk list ceph-node-01`
     - Уничтожение как GPT, так и MBR на устройствах sdb, sdc, sdd:  
-      `ceph-deploy disk zap cephthree-01:sdb cephthree-01:sdc cephthree-01:sdd`
+      `ceph-deploy disk zap ceph-node-01:sdb ceph-node-01:sdc ceph-node-01:sdd`
     - Создание OSD на устройствах sdb, sdc, sdd:  
-      `ceph-deploy osd create cephthree-01:sdb cephthree-01:sdc cephthree-01:sdd`
+      `ceph-deploy osd create ceph-node-01:sdb ceph-node-01:sdc ceph-node-01:sdd`
 
     Делаем всё то-же самое
     ----------------------------------------------------------------------------------------------------------------------
-    - Для cephthree-02:  
+    - Для ceph-node-02:  
       ```sh
-      ceph-deploy disk list cephthree-02  
-      ceph-deploy disk zap cephthree-02:sdb cephthree-02:sdc cephthree-02:sdd  
-      ceph-deploy osd create cephthree-02:sdb cephthree-02:sdc cephthree-02:sdd
+      ceph-deploy disk list ceph-node-02  
+      ceph-deploy disk zap ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd  
+      ceph-deploy osd create ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd
       ```  
 
-    - И для cephthree-03  
+    - И для ceph-node-03  
       ```sh
-      ceph-deploy disk list cephthree-03
-      ceph-deploy disk zap cephthree-03:sdb cephthree-03:sdc cephthree-03:sdd
-      ceph-deploy osd create cephthree-03:sdb cephthree-03:sdc cephthree-03:sdd
+      ceph-deploy disk list ceph-node-03
+      ceph-deploy disk zap ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
+      ceph-deploy osd create ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
       ```
   + Проверяем статус ceph:  
     `ceph -s`
   + Должен быть *WARNING*: clock skew. Он появляется из-за того, что время на хостах не синхронизировано. Исправляем:  
     - Устанавливаем ntpdate и ntp-doc:  
       `sudo apt install ntp ntpdate ntp-doc`
-    - В файле /etc/ntp.conf находим добавляем сервера времени
+    - В файле `/etc/ntp.conf` находим добавляем сервера времени
     - Перезагружаем ntp:  
       `sudo service ntp restart`
     - Проверяем, через некоторое время *WARNING* должен исчезнуть:  
@@ -78,7 +78,7 @@
         [client]    
         rbd_cache = false
       ```
-    - Задаем экспорт по iscsi rbd тома, в файле/etc/tgt/targets.conf:  
+    - Задаем экспорт по iscsi rbd тома, в файле `/etc/tgt/targets.conf`:  
         ```
         <target iqn.2016-11.rbdstore.iscsi.com:iscsi>    
             driver iscsi    
