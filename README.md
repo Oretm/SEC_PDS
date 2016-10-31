@@ -5,7 +5,8 @@
   + Добавление алиаса ceph='sudo ceph' (для удобства в будущем):
     Открываем файл ~/.bashrs и в конец файла добавляем строку alias ceph='sudo ceph', и перезагружаем оболочку
   + Создание ssh-ключей, чтобы не вводить пароль каждый раз, при подключении к другому хосту по ssh:
-    - `ssh-keygen` // Создаем ключ для подключения к хостам с первого без набора пароля
+    - Создаем ключ для подключения к хостам с первого без набора пароля  
+    `ssh-keygen`
     - `ssh-copy-id cephthree-01` // Копируем ключ на cephthree-01
     - `ssh-copy-id cephthree-02` // Копируем ключ на cephthree-02
     - `ssh-copy-id cephthree-03` // Копируем ключ на cephthree-03
@@ -53,7 +54,7 @@
        `[client]  
        rbd_cache = false`
     - Задаем экспорт по iscsi rbd тома, в файле/etc/tgt/targets.conf:  
-        `<target iqn.2016-11.rbdstore.iscsi.com:iscsi>  
+        `<target iqn.2016-11.rbdstore.iscsi.com:iscsi> 
             driver iscsi  
             bs-type rbd  
             backing-store rbd/iscsi  
