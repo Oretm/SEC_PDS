@@ -1,9 +1,9 @@
 # Установка и настройка Ubuntu
   + Установка Ubuntu Server 14.04 LTS <http://releases.ubuntu.com/trusty/ubuntu-14.04.5-server-amd64.iso>
   + Добавление пользователя cephthree в список исключения sudo (Чтобы не вводить каждый раз пароль):
-    В файле /etc/sudoers находим строку '%sudo   ALL=(ALL:ALL) ALL' и заменяем её на '%sudo   ALL=(ALL:ALL) NOPASSWD: ALL'
+    В файле `/etc/sudoers` находим строку `%sudo   ALL=(ALL:ALL) ALL` и заменяем её на `%sudo   ALL=(ALL:ALL) NOPASSWD: ALL`
   + Добавление алиаса ceph='sudo ceph' (для удобства в будущем):
-    Открываем файл ~/.bashrs и в конец файла добавляем строку alias ceph='sudo ceph', и перезагружаем оболочку
+    Открываем файл `~/.bashrs` и в конец файла добавляем строку `alias ceph='sudo ceph'`, и перезагружаем оболочку
   + Создание ssh-ключей, чтобы не вводить пароль каждый раз, при подключении к другому хосту по ssh:
     - Создаем ключ для подключения к хостам с первого без набора пароля:  
       `ssh-keygen`
@@ -85,7 +85,7 @@
             bs-type rbd    
             backing-store rbd/iscsi
             initiator-address ALL    
-            </target>
+        </target>
         ```
     - Перезапускаем iscsi target:  
       `sudo service tgt restart`
