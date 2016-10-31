@@ -53,12 +53,12 @@
        [client]
        rbd_cache = false
     - Задаем экспорт по iscsi rbd тома, в файле/etc/tgt/targets.conf:
-        <target iqn.2016-11.rbdstore.iscsi.com:iscsi>
+        `<target iqn.2016-11.rbdstore.iscsi.com:iscsi>
             driver iscsi
             bs-type rbd
             backing-store rbd/iscsi
             initiator-address ALL
-        </target>
+        </target>`
     - sudo service tgt restart // Перезапускаем iscsi target
     - sudo tgt-admin -s // Просматриваем текущую настройку iSCSI Target
     - Подключаем диск в Windows через Инициатор iSCSI, и всё!
