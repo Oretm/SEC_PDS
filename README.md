@@ -36,10 +36,10 @@
   + Проверяем статус ceph:
     ceph -s
   + Должен быть *WARNING*: clock skew. Он появляется из-за того, что время на хостах не синхронизировано. Исправляем:
-    1) sudo apt install ntp ntpdate ntp-doc // Устанавливаем ntpdate и ntp-doc
-    2) В файле /etc/ntp.conf находим добавляем сервера времени
-    3) sudo service ntp restart // Перезагружаем ntp
-    4) ceph -s //Проверяем, через некоторое время *WARNING* должен исчезнуть
+    - sudo apt install ntp ntpdate ntp-doc // Устанавливаем ntpdate и ntp-doc
+    - В файле /etc/ntp.conf находим добавляем сервера времени
+    - sudo service ntp restart // Перезагружаем ntp
+    - ceph -s //Проверяем, через некоторое время *WARNING* должен исчезнуть
 
 # Установка и настройка iSCSI Target
   + Создание RBD:
