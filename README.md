@@ -5,10 +5,10 @@
   + Добавление алиаса ceph='sudo ceph' (для удобства в будущем):
     Открываем файл ~/.bashrs и в конец файла добавляем строку alias ceph='sudo ceph', и перезагружаем оболочку
   + Создание ssh-ключей, чтобы не вводить пароль каждый раз, при подключении к другому хосту по ssh:
-    1. ssh-keygen // Создаем ключ для подключения к хостам с первого без набора пароля
-    2. ssh-copy-id cephthree-01 // Копируем ключ на cephthree-01
-    3. ssh-copy-id cephthree-02 // Копируем ключ на cephthree-02
-    4. ssh-copy-id cephthree-03 // Копируем ключ на cephthree-03
+    - ssh-keygen // Создаем ключ для подключения к хостам с первого без набора пароля
+    - ssh-copy-id cephthree-01 // Копируем ключ на cephthree-01
+    - ssh-copy-id cephthree-02 // Копируем ключ на cephthree-02
+    - ssh-copy-id cephthree-03 // Копируем ключ на cephthree-03
 
 # Развертывание ceph
   + Скачивание ceph-deploy:
