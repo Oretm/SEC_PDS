@@ -15,7 +15,7 @@
     - `sudo apt install ceph-deploy`
   + Разворачиваем Ceph
     - `ceph-deploy new cephthree-01 cephthree-02 cephthree-03` // Создание конфига ceph.conf
-    - `ceph-deploy install --release jewel cephthree-01 cephthree-02 cephthree-03 // Установка Ceph 0.80.11 Jewel на cephthree-01, cephthree-02, cephthree-03`
+    - `ceph-deploy install --release jewel cephthree-01 cephthree-02 cephthree-03` // Установка Ceph 0.80.11 Jewel на cephthree-01, cephthree-02, cephthree-03
     - `ceph -v` // Посмотреть версию (проверка того, что ceph установился)
   + Установка монитров для ceph:
     `ceph-deploy mon create-initial`
