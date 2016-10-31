@@ -43,7 +43,7 @@
         ceph-deploy osd create ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd
     ```  
 
-    - И для ceph-node-03  
+    - И для ceph-node-03:  
     ```sh
         ceph-deploy disk list ceph-node-03
         ceph-deploy disk zap ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
