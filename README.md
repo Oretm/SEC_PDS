@@ -49,15 +49,15 @@
     - `sudo rbd showmapped` // Проверяем, что образ iscsi добавился в карту
   + Настройка iSCSI Target:
     - `sudo apt install tgt` // Устанавливаем iSCSI Target
-    - В ~/ceph.conf обязательно отключаем кеширование rbd. Для этого добавляем в этот файл следующие строки:
-       `[client]
+    - В ~/ceph.conf обязательно отключаем кеширование rbd. Для этого добавляем в этот файл следующие строки:  
+       `[client]  
        rbd_cache = false`
-    - Задаем экспорт по iscsi rbd тома, в файле/etc/tgt/targets.conf:
-        `<target iqn.2016-11.rbdstore.iscsi.com:iscsi>
-            driver iscsi
-            bs-type rbd
-            backing-store rbd/iscsi
-            initiator-address ALL
+    - Задаем экспорт по iscsi rbd тома, в файле/etc/tgt/targets.conf:  
+        `<target iqn.2016-11.rbdstore.iscsi.com:iscsi>  
+            driver iscsi  
+            bs-type rbd  
+            backing-store rbd/iscsi  
+            initiator-address ALL  
         </target>`
     - `sudo service tgt restart` // Перезапускаем iscsi target
     - `sudo tgt-admin -s` // Просматриваем текущую настройку iSCSI Target
