@@ -73,11 +73,11 @@
        `[client]  
        rbd_cache = false`
     - Задаем экспорт по iscsi rbd тома, в файле/etc/tgt/targets.conf:  
-        `<target iqn.2016-11.rbdstore.iscsi.com:iscsi> 
-            driver iscsi  
-            bs-type rbd  
-            backing-store rbd/iscsi  
-            initiator-address ALL  
+        `<target iqn.2016-11.rbdstore.iscsi.com:iscsi>\n
+            driver iscsi\n
+            bs-type rbd\n
+            backing-store rbd/iscsi\n
+            initiator-address ALL\n
         </target>`
     - Перезапускаем iscsi target:  
       `sudo service tgt restart`
