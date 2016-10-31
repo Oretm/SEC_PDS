@@ -38,16 +38,16 @@
     ----------------------------------------------------------------------------------------------------------------------
     - Для ceph-node-02:  
     ```sh
-        ceph-deploy disk list ceph-node-02  
-        ceph-deploy disk zap ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd  
-        ceph-deploy osd create ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd
+    ceph-deploy disk list ceph-node-02  
+    ceph-deploy disk zap ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd  
+    ceph-deploy osd create ceph-node-02:sdb ceph-node-02:sdc ceph-node-02:sdd
     ```  
 
     - И для ceph-node-03:  
     ```sh
-        ceph-deploy disk list ceph-node-03
-        ceph-deploy disk zap ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
-        ceph-deploy osd create ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
+    ceph-deploy disk list ceph-node-03
+    ceph-deploy disk zap ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
+    ceph-deploy osd create ceph-node-03:sdb ceph-node-03:sdc ceph-node-03:sdd
     ```
   + Проверяем статус ceph:  
     `ceph -s`
@@ -75,17 +75,17 @@
       `sudo apt install tgt`
     - В ~/ceph.conf обязательно отключаем кеширование rbd. Для этого добавляем в этот файл следующие строки:  
     ```
-        [client]
-        rbd_cache = false
+    [client]
+    rbd_cache = false
     ```
     - Задаем экспорт по iscsi rbd тома, в файле /etc/tgt/targets.conf:  
     ```
-        <target iqn.2016-11.rbdstore.iscsi.com:iscsi>
-          driver iscsi
-          bs-type rbd
-          backing-store rbd/iscsi
-          initiator-address ALL
-        </target>
+    <target iqn.2016-11.rbdstore.iscsi.com:iscsi>
+      driver iscsi
+      bs-type rbd
+      backing-store rbd/iscsi
+      initiator-address ALL
+    </target>
     ```
     - Перезапускаем iscsi target:  
       `sudo service tgt restart`
