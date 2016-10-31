@@ -1,9 +1,9 @@
 # Установка и настройка Ubuntu
   + Установка [Ubuntu Server 14.04 LTS](http://releases.ubuntu.com/trusty/ubuntu-14.04.5-server-amd64.iso)
   + Отключение ввода пароля при обращении через sudo:  
-    В файле `/etc/sudoers` находим строку `%sudo   ALL=(ALL:ALL) ALL` и заменяем её на `%sudo   ALL=(ALL:ALL) NOPASSWD: ALL`.     Проделываем это на всех хостах.
+    В файле /etc/sudoers находим строку `%sudo   ALL=(ALL:ALL) ALL` и заменяем её на `%sudo   ALL=(ALL:ALL) NOPASSWD: ALL`.     Проделываем это на всех хостах.
   + Добавление алиаса ceph='sudo ceph' (для удобства в будущем):
-    Открываем файл `~/.bashrs` и в конец файла добавляем строку `alias ceph='sudo ceph'`, и перезагружаем оболочку
+    Открываем файл ~/.bashrs и в конец файла добавляем строку `alias ceph='sudo ceph'`, и перезагружаем оболочку
   + Создание ssh-ключей, чтобы не вводить пароль каждый раз, при подключении к другому хосту по ssh:
     - Создаем ключ для подключения к хостам с первого без набора пароля:  
       `ssh-keygen`
@@ -18,7 +18,7 @@
   + Установка ceph-deploy:
     - `sudo apt install ceph-deploy`
   + Разворачиваем Ceph:
-    - Создание конфига ceph.conf:  
+    - Создание конфигурационного файла ceph.conf:  
       `ceph-deploy new ceph-node-01 ceph-node-02 ceph-node-03`
     - Установка Ceph 0.80.11 Jewel на ceph-node-01, ceph-node-02, ceph-node-03:  
       `ceph-deploy install --release jewel ceph-node-01 ceph-node-02 ceph-node-03`
@@ -54,7 +54,7 @@
   + Должен быть *WARNING*: clock skew. Он появляется из-за того, что время на хостах не синхронизировано. Исправляем:  
     - Устанавливаем ntpdate и ntp-doc:  
       `sudo apt install ntp ntpdate ntp-doc`
-    - В файле `/etc/ntp.conf` находим добавляем сервера времени
+    - В файле /etc/ntp.conf находим добавляем сервера времени
     - Перезагружаем ntp:  
       `sudo service ntp restart`
     - Проверяем, через некоторое время *WARNING* должен исчезнуть:  
@@ -78,7 +78,7 @@
         [client]
         rbd_cache = false
     ```
-    - Задаем экспорт по iscsi rbd тома, в файле `/etc/tgt/targets.conf`:  
+    - Задаем экспорт по iscsi rbd тома, в файле /etc/tgt/targets.conf:  
     ```
         <target iqn.2016-11.rbdstore.iscsi.com:iscsi>
           driver iscsi
