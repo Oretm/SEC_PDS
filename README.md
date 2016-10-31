@@ -37,14 +37,18 @@
     Делаем всё то-же самое
     ----------------------------------------------------------------------------------------------------------------------
     - Для cephthree-02:  
-      `ceph-deploy disk list cephthree-02`  
-      `ceph-deploy disk zap cephthree-02:sdb cephthree-02:sdc cephthree-02:sdd`  
-      `ceph-deploy osd create cephthree-02:sdb cephthree-02:sdc cephthree-02:sdd`  
+      ```sh
+      ceph-deploy disk list cephthree-02  
+      ceph-deploy disk zap cephthree-02:sdb cephthree-02:sdc cephthree-02:sdd  
+      ceph-deploy osd create cephthree-02:sdb cephthree-02:sdc cephthree-02:sdd
+      ```  
 
     - И для cephthree-03  
-      `ceph-deploy disk list cephthree-03`  
-      `ceph-deploy disk zap cephthree-03:sdb cephthree-03:sdc cephthree-03:sdd`  
-      `ceph-deploy osd create cephthree-03:sdb cephthree-03:sdc cephthree-03:sdd`
+      ```sh
+      ceph-deploy disk list cephthree-03
+      ceph-deploy disk zap cephthree-03:sdb cephthree-03:sdc cephthree-03:sdd
+      ceph-deploy osd create cephthree-03:sdb cephthree-03:sdc cephthree-03:sdd
+      ```
   + Проверяем статус ceph:  
     `ceph -s`
   + Должен быть *WARNING*: clock skew. Он появляется из-за того, что время на хостах не синхронизировано. Исправляем:  
@@ -76,11 +80,11 @@
        ```
     - Задаем экспорт по iscsi rbd тома, в файле/etc/tgt/targets.conf:  
         ```
-        <target iqn.2016-11.rbdstore.iscsi.com:iscsi> \r\n
-            driver iscsi \r\n
-            bs-type rbd \r\n
-            backing-store rbd/iscsi \r\n
-            initiator-address ALL \r\n
+        <target iqn.2016-11.rbdstore.iscsi.com:iscsi>
+            driver iscsi
+            bs-type rbd
+            backing-store rbd/iscsi
+            initiator-address ALL
         </target>
         ```
     - Перезапускаем iscsi target:  
