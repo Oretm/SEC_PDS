@@ -1,6 +1,6 @@
 # Установка и настройка Ubuntu
   + Установка [Ubuntu Server 14.04 LTS](http://releases.ubuntu.com/trusty/ubuntu-14.04.5-server-amd64.iso)
-  + Добавление пользователя cephthree в список исключения sudo (Чтобы не вводить каждый раз пароль):
+  + Отключение ввода пароля при обращении через sudo:
     В файле `/etc/sudoers` находим строку `%sudo   ALL=(ALL:ALL) ALL` и заменяем её на `%sudo   ALL=(ALL:ALL) NOPASSWD: ALL`.     Проделываем это на всех хостах.
   + Добавление алиаса ceph='sudo ceph' (для удобства в будущем):
     Открываем файл `~/.bashrs` и в конец файла добавляем строку `alias ceph='sudo ceph'`, и перезагружаем оболочку
