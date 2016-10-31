@@ -75,7 +75,7 @@
       `sudo apt install tgt`
     - В ~/ceph.conf обязательно отключаем кеширование rbd. Для этого добавляем в этот файл следующие строки:  
        ```
-       [client]
+       [client]  
        rbd_cache = false
        ```
     - Задаем экспорт по iscsi rbd тома, в файле/etc/tgt/targets.conf:  
